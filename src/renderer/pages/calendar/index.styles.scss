@@ -1,0 +1,16 @@
+.container-calendar {
+    height: 100%;
+    background-color: #f4f4f4;
+    position: relative;
+    .inside {
+        position: absolute;
+        width: calc(100% - 4rem);
+        height: calc(100% - 4rem);
+        box-shadow: 0 0 2px 1px rgba(0, 0, 0, .1);
+        padding: 2rem 2rem;
+        top: 2rem;
+        left: 2rem;
+        border-radius: .5rem;
+        background-color: white;
+    }
+}

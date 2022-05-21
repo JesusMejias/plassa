@@ -1,0 +1,43 @@
+.front-page {
+    .header {
+        display: flex;
+        justify-content: space-between;
+        h1 {
+            font-weight: normal;
+            margin: -.5rem;
+            padding: .5rem;
+            cursor: pointer;
+            border-radius: .25rem;
+            div {
+                color: #7c7c7c;
+                font-size: .75em;
+            }
+            &:hover {
+                background-color: #e5e5e5;
+            }
+            * {
+                cursor: pointer;
+            }
+        }
+        .settings-button {
+            display: flex;
+            width: 3rem;
+            justify-content: space-between;
+            align-self: flex-start;
+            cursor: pointer;
+            padding: .25rem;
+            aspect-ratio: 1 / 1;
+            span {
+                cursor: pointer;
+                width: .25rem;
+                height: .25rem;
+                background-color: #b4b4b4;
+                border-radius: 50%;
+                display: block;
+            }
+            &:hover span {
+                background-color:#5b5b5b;
+            }
+        }
+    }
+}
