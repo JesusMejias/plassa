@@ -15,7 +15,7 @@ export default function Calendar(props: any) {
     if (preferences.format === 'US') {
         tempDate = format(date, 'EEEE, MMMM do');
     } else {
-        tempDate = `${format(date, 'EEEE')} the ${format(date, 'do')} of ${format(date, 'MMMM')}`;
+        tempDate = `${format(date, 'EEEE')}, ${format(date, 'd')} ${format(date, 'MMMM')}`;
     }
     return (
         <div className='container-calendar'>
