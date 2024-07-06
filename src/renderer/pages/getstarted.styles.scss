@@ -25,7 +25,7 @@
         font-size: 2rem;
     }
 
-    span {
+    span.option {
         display: inline-block;
         font-size: 1.5rem;
         border: 1px solid white;
@@ -55,6 +55,54 @@
         }
     }
 
+    .dropdown-box {
+        position: relative;
+        align-self: start;
+        .dropdown-button {
+            display: inline-block;
+            font-size: 1.5rem;
+            border: 1px solid white;
+            border-radius: .5rem;
+            padding: .5rem 1.25rem;
+            cursor: pointer;
+            -webkit-app-region: no-drag;
+            &:active {
+                box-shadow: 0 4px 0 2px rgba(0, 0, 0, .2), inset 0 4px 0 rgba(0, 0, 0, .2);
+                backdrop-filter: blur(3px);
+            }
+            & svg, & path {
+                cursor: inherit;
+            }
+        }
+        .dropdown-content {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.396);
+            backdrop-filter: blur(6px);
+            border: 1px solid white;
+            -webkit-app-region: no-drag;
+            display: flex;
+            flex-direction: column;
+            border-radius: .5rem;
+            top: calc(100% + .5rem);
+            left: 0;
+            overflow: hidden;
+            span.day {
+                display: block;
+                font-size: 1rem;
+                padding: .5rem 1.25rem;
+                color: rgba(black, .6);
+                cursor: pointer;
+                &:hover {
+                    background-color: rgba(255, 255, 255, 0.2);
+                }
+                &.selected {
+                    font-weight: 600;
+                    background-color: rgba(255, 255, 255, 0.4);
+                }
+            }
+        }
+    }
+
     & .link {
         appearance: none;
         outline: none;
@@ -81,5 +129,11 @@
         strong {
             cursor: inherit;
         }
+    }
+
+    .btn-container {
+        align-self: end;
+        margin-top: auto;
+        margin-bottom: 2rem;
     }
 }

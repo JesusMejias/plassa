@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import './App.scss';
 import Welcome from './pages/welcome';
@@ -22,7 +21,7 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Welcome />} />
-      <Route path="/getstarted" element={<GetStarted />} />
+      <Route path="/getstarted" element={<GetStarted store={store} />} />
       <Route path="/calendar" element={<Calendar store={store} />} />
     </Routes>
   );
