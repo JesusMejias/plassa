@@ -27,7 +27,7 @@ export default function Settings({ preferences, store, setPreferences, setCurren
                 <h1>
                     Settings
                 </h1>
-                <div className='settings-button' onClick={() => setCurrentPage('front-page')} title="Exit Settings"><span></span><span></span><span></span></div>
+                <div className='settings-button' onClick={() => setCurrentPage('frontpage')} title="Exit Settings"><span></span><span></span><span></span></div>
             </div>
             <h2>Week Starts On</h2>
             <div><span className={`button ${preferences.day === 'Sunday' ? 'selected' : ''}`} onClick={() => setDay('Sunday')}>Sunday</span></div>
