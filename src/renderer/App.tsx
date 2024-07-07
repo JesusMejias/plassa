@@ -11,7 +11,7 @@ declare global {
         get: (key: string) => any;
         set: (key: string, val: any) => void;
         delete: (key: string) => void;
-      };
+      },
     };
   }
 }

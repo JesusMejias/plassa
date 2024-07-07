@@ -19,7 +19,8 @@
             display: flex;
             width: 3rem;
             justify-content: space-between;
-            align-self: center;
+            align-items: center;
+            align-self: start;
             padding: .25rem;
             aspect-ratio: 1 / 1;
             span {

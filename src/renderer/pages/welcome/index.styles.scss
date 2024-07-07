@@ -21,10 +21,15 @@
     }
 
     & .link {
+        appearance: none;
+        outline: none;
+        font-family: inherit;
         border-radius: .25rem;
         font-size: 1.25rem;
         text-decoration: none;
+        border: none;
         margin-top: 4rem;
+        margin-right: 1rem;
         outline: none;
         padding: .5rem .75rem;
         display: inline-block;

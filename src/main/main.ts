@@ -34,13 +34,13 @@ ipcMain.on('ipc-example', async (event, arg) => {
   event.reply('ipc-example', msgTemplate('pong'));
 });
 
-ipcMain.on('electron-store-get', async (event, key) => {
+ipcMain.on('store-get', async (event, key) => {
   event.returnValue = store.get(key);
 });
 
-ipcMain.on('electron-store-set', async (event, key, val) => store.set(key, val));
+ipcMain.on('store-set', async (event, key, val) => store.set(key, val));
 
-ipcMain.on('electron-store-delete', async (event, key) => store.delete(key));
+ipcMain.on('store-delete', async (event, key) => store.delete(key));
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
