@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import './App.scss';
 import Welcome from './pages/welcome';
-import GetStarted from './pages/getstarted';
+import GetStarted from './pages/welcome/getstarted';
 import Calendar from './pages/calendar/index';
 
 declare global {

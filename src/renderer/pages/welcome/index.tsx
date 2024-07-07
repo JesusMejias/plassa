@@ -1,4 +1,4 @@
-import './welcome.styles.scss';
+import './index.styles.scss';
 import { Link } from 'react-router-dom';
 
 export default function Welcome() {

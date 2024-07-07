@@ -3,7 +3,7 @@ import { format } from 'date-fns';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
-import FrontPage from './front-page';
+import FrontPage from './frontpage';
 import Settings from './settings';
 
 export default function Calendar(props: any) {
