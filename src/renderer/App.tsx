@@ -7,6 +7,7 @@ import Calendar from './pages/calendar/index';
 declare global {
   interface Window {
     electron: {
+      makeWindowResizable(): void,
       store: {
         get: (key: string) => any;
         set: (key: string, val: any) => void;

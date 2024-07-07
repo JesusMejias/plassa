@@ -16,10 +16,11 @@ export default function GetStarted({ store } : any) {
             day,
             format
         });
+        window.electron.makeWindowResizable();
         navigate("/calendar", { replace: true });
     }
     return (
-        <div className='container-getstarted' onMouseDown={(e) => (!e.target.closest('.dropdown-box')) && setDayDropdownOpen(false)}>
+        <div className='container-getstarted' onMouseDown={(e: any) => (!e.target?.closest('.dropdown-box')) && setDayDropdownOpen(false)}>
             <h1>Calendary</h1>
             <h2>Let's set things up.</h2>
             {page === 1 ? 

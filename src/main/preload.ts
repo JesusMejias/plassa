@@ -27,6 +27,7 @@ contextBridge.exposeInMainWorld('electron', {
     },
     delete(key: string) {
       ipcRenderer.send('store-delete', key);
-    }
-  }
+    },
+  },
+  makeWindowResizable: () => ipcRenderer.send('make-window-resizable'),
 });

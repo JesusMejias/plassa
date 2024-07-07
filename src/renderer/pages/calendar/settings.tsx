@@ -34,7 +34,7 @@ export default function Settings({ preferences, store, setPreferences, setCurren
             <div><span className={`button ${preferences.day === 'Monday' ? 'selected' : ''}`} onClick={() => setDay('Monday')}>Monday</span></div>
             <h2>Preferred Date Format</h2>
             <div><span className={`button ${preferences.format === 'US' ? 'selected' : ''}`} onClick={() => setFormat('US')}>Month | <strong>Day</strong> | Year</span></div>
-            <div><span className={`button ${preferences.format === 'Elsewhere' ? 'selected' : ''}`} onClick={() => setFormat('Elsewhere')}>Day | <strong>Month</strong> | Year</span></div>
+            <div><span className={`button ${preferences.format === 'World' ? 'selected' : ''}`} onClick={() => setFormat('World')}>Day | <strong>Month</strong> | Year</span></div>
         </div>
     );
 }

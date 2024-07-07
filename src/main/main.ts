@@ -96,6 +96,11 @@ const createWindow = async () => {
     });
   
     mainWindow.loadURL(resolveHtmlPath('/'));
+    ipcMain.on('make-window-resizable', () => {
+      mainWindow?.setResizable(true);
+      mainWindow?.setFullScreenable(true);
+      mainWindow?.setMinimumSize(1024, 728);
+    });
   } else {
     mainWindow = new BrowserWindow({
       width: 1024,
