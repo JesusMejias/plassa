@@ -14,4 +14,7 @@ body {
 *, *::before, *::after {
   box-sizing: border-box;
   cursor: default;
+  outline: none;
+  font-family: inherit;
+  appearance: none;
 }

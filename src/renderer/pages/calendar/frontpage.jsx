@@ -2,6 +2,8 @@ import './frontpage.styles.scss';
 import { useState } from 'react';
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons';
 
 export default function FrontPage(props) {
     const [displayOption, setDisplayOption] = useState('Day');
@@ -20,6 +22,7 @@ export default function FrontPage(props) {
                 </h1>
                 <div className='settings-button' onClick={() => props.setCurrentPage('settings')} title="Settings"><span></span><span></span><span></span></div>
             </div>
+            <div className='next-before-options'><button><FontAwesomeIcon icon={faCaretLeft} /></button><button>Today</button><button><FontAwesomeIcon icon={faCaretRight} /></button></div>
         </div>
     );
 }
