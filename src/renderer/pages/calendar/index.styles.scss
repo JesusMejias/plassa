@@ -2,6 +2,7 @@
     height: 100%;
     background-color: #f4f4f4;
     position: relative;
+    -webkit-app-region: drag;
     .inside {
         position: absolute;
         width: calc(100% - 4rem);
@@ -12,5 +13,6 @@
         left: 2rem;
         border-radius: .5rem;
         background-color: white;
+        -webkit-app-region: no-drag;
     }
 }

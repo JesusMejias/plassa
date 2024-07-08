@@ -1,4 +1,56 @@
 .front-page {
+    .display-options {
+        position: absolute;
+        top: 0;
+        transform: translate(-50%, -50%);
+        left: 50%;
+        background-color: #f4f4f4;
+        border-radius: 6px;
+        padding: .5rem;
+        box-shadow: inset 0 -2px 0 rgba(0, 0, 0, .1);
+        display: flex;
+        gap: .5rem;
+        -webkit-app-region: no-drag;
+        button {
+            appearance: none;
+            font-size: inherit;
+            font-family: inherit;
+            color: inherit;
+            border: none;
+            border-radius: 4px;
+            background-color: transparent;
+            padding: .5rem;
+            &:active {
+                background-color: rgba(black, .1);
+            }
+            &.selected {
+                color: white;
+                position: relative;
+                overflow: hidden;
+                &.day {
+                    background-image: linear-gradient(0deg, #2b57be, #3b9cc9);
+                }
+                &.week {
+                    background-image: linear-gradient(0deg, #57be2b, #90c93b);
+                }
+                &.month {
+                    background-image: linear-gradient(0deg, #be552b, #c9763b);
+                }
+                &.year {
+                    background-image: linear-gradient(0deg, #9a3bc9, #be2ba5);
+                }
+                &:active::after {
+                    background-color: rgba(black, .1);
+                    content: '';
+                    width: 100%;
+                    height: 100%;
+                    top: 0;
+                    left: 0;
+                    position: absolute;
+                }
+            }
+        }
+    }
     .header {
         display: flex;
         justify-content: space-between;

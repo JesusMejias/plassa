@@ -1,6 +1,6 @@
 import './settings.styles.scss';
 
-export default function Settings({ preferences, store, setPreferences, setCurrentPage }) {
+export default function Settings({ preferences, store, setPreferences, setCurrentPage } : any) {
     const setDay = (day: string) => {
         store.set('preferences', {
             day,
