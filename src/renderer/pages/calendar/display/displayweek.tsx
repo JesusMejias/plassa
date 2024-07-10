@@ -1,6 +1,6 @@
 import './displayweek.styles.scss';
 
-export default function DisplayWeek(props: any) {
+export default function DisplayWeek({ date }: any) {
     return (
         <></>
     );

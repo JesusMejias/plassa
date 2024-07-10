@@ -1,6 +1,6 @@
 import './displayday.styles.scss';
 
-export default function DisplayDay(props: any) {
+export default function DisplayDay({ date }: any) {
     return (
         <></>
     );

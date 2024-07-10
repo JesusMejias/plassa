@@ -1,6 +1,6 @@
 import './displayyear.styles.scss';
 
-export default function DisplayYear(props: any) {
+export default function DisplayYear({ date }: any) {
     return (
         <></>
     );

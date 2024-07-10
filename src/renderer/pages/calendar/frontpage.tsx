@@ -4,8 +4,9 @@ import { format, add as addTime, sub as substractTime, sub } from 'date-fns';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons';
+import Display from './display';
 
-export default function FrontPage(props: any) {
+export default function FrontPage({ preferences }: any) {
   const [displayOption, setDisplayOption] = useState<String>('Day');
   const [isToday, setIsToday] = useState<Boolean>(true);
   const [currentDate, setCurrentDate] = useState<Date>(new Date());
@@ -60,7 +61,7 @@ export default function FrontPage(props: any) {
           <h1>
             <div>{format(isToday ? currentDate : selectedTime, 'iiii')}</div>
             <span>
-              {props.preferences.format === 'US'
+              {preferences.format === 'US'
                 ? format(isToday ? currentDate : selectedTime, 'MMMM do, Y')
                 : format(isToday ? currentDate : selectedTime, 'd MMMM, Y')}
             </span>
@@ -75,12 +76,11 @@ export default function FrontPage(props: any) {
         )}
         {displayOption === 'Year' && (
           <h1>
-            <span>
-              {format(isToday ? currentDate : selectedTime, 'Y')}
-            </span>
+            <span>{format(isToday ? currentDate : selectedTime, 'Y')}</span>
           </h1>
         )}
       </div>
+      <Display displayOption={displayOption} date={isToday ? currentDate : selectedTime} preferences={preferences} />
       <div className="next-before-options">
         <button onClick={substractDay}>
           <FontAwesomeIcon icon={faCaretLeft} />
