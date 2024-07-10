@@ -22,6 +22,24 @@ export default function FrontPage(props) {
         }
     }, [isToday]);
 
+    function substractDay() {
+        if (isToday) {
+            setSelectedTime(substractTime(currentDate, { days: 1 }));
+            setIsToday(false);
+        } else {
+            setSelectedTime(substractTime(selectedTime, { days: 1 }));
+        }
+    }
+
+    function addDay() {
+        if (isToday) {
+            setSelectedTime(addTime(currentDate, { days: 1 }));
+            setIsToday(false);
+        } else {
+            setSelectedTime(addTime(selectedTime, { days: 1 }));
+        }
+    }
+
     return (
         <div className='front-page'>
             <div className="display-options">
@@ -34,26 +52,13 @@ export default function FrontPage(props) {
                     <div>{format(isToday ? currentDate : selectedTime, 'iiii')}</div>
                     <span>{props.preferences.format === 'US' ? format(isToday ? currentDate : selectedTime, 'MMMM do, Y') : format(isToday ? currentDate : selectedTime, 'd MMMM, Y')}</span>
                 </h1>
-                <div className='settings-button' onClick={() => props.setCurrentPage('settings')} title="Settings"><span></span><span></span><span></span></div>
             </div>
-            <div className='next-before-options'><button onClick={() => {
-                if (isToday) {
-                    setSelectedTime(substractTime(currentDate, { days: 1 }));
-                    setIsToday(false);
-                } else {
-                    setSelectedTime(substractTime(selectedTime, { days: 1 }));
+            <div className='next-before-options'><button onClick={substractDay}><FontAwesomeIcon icon={faCaretLeft} /></button><button className={isToday ? 'selected' : ''} onClick={() => {
+                if (!isToday) {
+                    setCurrentDate(new Date());
+                    setIsToday(true);
                 }
-            }}><FontAwesomeIcon icon={faCaretLeft} /></button><button className={isToday ? 'selected' : ''} onClick={() => {
-                setCurrentDate(new Date());
-                setIsToday(true);
-            }}>Today</button><button onClick={() => {
-                if (isToday) {
-                    setSelectedTime(addTime(currentDate, { days: 1 }));
-                    setIsToday(false);
-                } else {
-                    setSelectedTime(addTime(selectedTime, { days: 1 }));
-                }
-            }}><FontAwesomeIcon icon={faCaretRight} /></button></div>
+            }}>Today</button><button onClick={addDay}><FontAwesomeIcon icon={faCaretRight} /></button></div>
         </div>
     );
 }
