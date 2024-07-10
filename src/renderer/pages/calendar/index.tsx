@@ -8,12 +8,11 @@ import Settings from './settings';
 export default function Calendar(props: any) {
     const store = props.store;
     const [preferences, setPreferences] = useState(store.get('preferences'));
-    const date = new Date();
     const [currentPage, setCurrentPage] = useState('frontpage');
     return (
         <div className='container-calendar'>
             <div className="inside">
-                {currentPage === 'frontpage' ? <FrontPage date={date} preferences={preferences} setCurrentPage={setCurrentPage} /> : null}
+                {currentPage === 'frontpage' ? <FrontPage preferences={preferences} setCurrentPage={setCurrentPage} /> : null}
                 {currentPage === 'settings' ? <Settings preferences={preferences} store={store} setPreferences={setPreferences} setCurrentPage={setCurrentPage} /> : null}
             </div>
         </div>
