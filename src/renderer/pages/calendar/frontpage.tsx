@@ -27,20 +27,16 @@ export default function FrontPage({ preferences }: any) {
     type TimeAdjustment = {
       [key: string]: { days?: number; weeks?: number; months?: number; years?: number; };
     };
-    const operation = addTime ? add : sub; // Choose the operation based on the add parameter
-    const timeAdjustment: TimeAdjustment = { // Define the time adjustment based on displayOption
+    const operation = addTime ? add : sub;
+    const timeAdjustment: TimeAdjustment = {
       'Day': { days: 1 },
       'Week': { weeks: 1 },
       'Month': { months: 1 },
       'Year': { years: 1 }
     };
-  
-    // Determine the base time to adjust from
     const baseTime = isToday ? currentDate : selectedTime;
-  
     const newTime = operation(baseTime, timeAdjustment[displayOption]);
-  
-    // Update the selected time and isToday flag
+    
     setSelectedTime(newTime);
     if (isToday) setIsToday(false);
   }
