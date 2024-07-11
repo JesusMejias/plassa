@@ -1,4 +1,7 @@
 .front-page {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     .display-options {
         position: absolute;
         top: 0;
@@ -87,11 +90,13 @@
     .header {
         display: flex;
         justify-content: space-between;
+        margin-bottom: 1rem;
         h1 {
             font-weight: normal;
             margin: 0;
             div {
                 color: #7c7c7c;
+                margin-top: 1rem;
                 font-size: .75em;
             }
         }
