@@ -1,13 +1,13 @@
 import './frontpage.styles.scss';
 import { useState, useEffect } from 'react';
-import { format, add as addTime, sub as substractTime, sub } from 'date-fns';
+import { format, add, sub } from 'date-fns';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons';
 import Display from './display';
 
 export default function FrontPage({ preferences }: any) {
-  const [displayOption, setDisplayOption] = useState<String>('Day');
+  const [displayOption, setDisplayOption] = useState('Day');
   const [isToday, setIsToday] = useState<Boolean>(true);
   const [currentDate, setCurrentDate] = useState<Date>(new Date());
   const [selectedTime, setSelectedTime] = useState<Date>(new Date());
@@ -23,22 +23,26 @@ export default function FrontPage({ preferences }: any) {
     }
   }, [isToday]);
 
-  function substractDay() {
-    if (isToday) {
-      setSelectedTime(substractTime(currentDate, { days: 1 }));
-      setIsToday(false);
-    } else {
-      setSelectedTime(substractTime(selectedTime, { days: 1 }));
-    }
-  }
-
-  function addDay() {
-    if (isToday) {
-      setSelectedTime(addTime(currentDate, { days: 1 }));
-      setIsToday(false);
-    } else {
-      setSelectedTime(addTime(selectedTime, { days: 1 }));
-    }
+  function adjustTime(addTime: boolean) {
+    type TimeAdjustment = {
+      [key: string]: { days?: number; weeks?: number; months?: number; years?: number; };
+    };
+    const operation = addTime ? add : sub; // Choose the operation based on the add parameter
+    const timeAdjustment: TimeAdjustment = { // Define the time adjustment based on displayOption
+      'Day': { days: 1 },
+      'Week': { weeks: 1 },
+      'Month': { months: 1 },
+      'Year': { years: 1 }
+    };
+  
+    // Determine the base time to adjust from
+    const baseTime = isToday ? currentDate : selectedTime;
+  
+    const newTime = operation(baseTime, timeAdjustment[displayOption]);
+  
+    // Update the selected time and isToday flag
+    setSelectedTime(newTime);
+    if (isToday) setIsToday(false);
   }
 
   return (
@@ -82,7 +86,7 @@ export default function FrontPage({ preferences }: any) {
       </div>
       <Display displayOption={displayOption} date={isToday ? currentDate : selectedTime} preferences={preferences} />
       <div className="next-before-options">
-        <button onClick={substractDay}>
+        <button onClick={() => adjustTime(false)}>
           <FontAwesomeIcon icon={faCaretLeft} />
         </button>
         <button
@@ -96,7 +100,7 @@ export default function FrontPage({ preferences }: any) {
         >
           Today
         </button>
-        <button onClick={addDay}>
+        <button onClick={() => adjustTime(true)}>
           <FontAwesomeIcon icon={faCaretRight} />
         </button>
       </div>
