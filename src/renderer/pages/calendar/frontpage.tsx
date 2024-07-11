@@ -1,7 +1,6 @@
 import './frontpage.styles.scss';
 import { useState, useEffect } from 'react';
-import { format, add, sub } from 'date-fns';
-import { Link } from 'react-router-dom';
+import { format, add, sub, getYear } from 'date-fns';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons';
 import Display from './display';
@@ -36,7 +35,6 @@ export default function FrontPage({ preferences }: any) {
     };
     const baseTime = isToday ? currentDate : selectedTime;
     const newTime = operation(baseTime, timeAdjustment[displayOption]);
-    
     setSelectedTime(newTime);
     if (isToday) setIsToday(false);
   }
@@ -62,21 +60,22 @@ export default function FrontPage({ preferences }: any) {
             <div>{format(isToday ? currentDate : selectedTime, 'iiii')}</div>
             <span>
               {preferences.format === 'US'
-                ? format(isToday ? currentDate : selectedTime, 'MMMM do, Y')
-                : format(isToday ? currentDate : selectedTime, 'd MMMM, Y')}
+                ? format(isToday ? currentDate : selectedTime, 'MMMM do')
+                : format(isToday ? currentDate : selectedTime, 'd MMMM')},{' '}
+              {getYear(isToday ? currentDate : selectedTime)}
             </span>
           </h1>
         )}
         {(displayOption === 'Week' || displayOption === 'Month') && (
           <h1>
             <span>
-              {format(isToday ? currentDate : selectedTime, 'MMMM Y')}
+              {`${format(isToday ? currentDate : selectedTime, 'MMMM')} ${getYear(isToday ? currentDate : selectedTime)}`}
             </span>
           </h1>
         )}
         {displayOption === 'Year' && (
           <h1>
-            <span>{format(isToday ? currentDate : selectedTime, 'Y')}</span>
+            <span>{getYear(isToday ? currentDate : selectedTime)}</span>
           </h1>
         )}
       </div>
