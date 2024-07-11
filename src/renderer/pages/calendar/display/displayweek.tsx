@@ -1,17 +1,25 @@
 import './displayweek.styles.scss';
+import { getDay, addDays, format } from 'date-fns';
 
 export default function DisplayWeek({ date, preferences }: any) {
-  const daysHeader = [
+  const originalDaysHeader = [
+    'Sunday',
     'Monday',
     'Tuesday',
     'Wednesday',
     'Thursday',
     'Friday',
     'Saturday',
-    'Sunday',
   ];
+  const weekStartsOn = 1;
+  const daysHeader = [...originalDaysHeader.slice(weekStartsOn), ...originalDaysHeader.slice(0, weekStartsOn)];
   const twentyFourHourFormat = false;
-  const hours = [];
+  const hours: number[] = [];
+
+  // Calculate the current day of the week number
+  const currentDayOfWeek = getDay(date);
+  // Adjust for the week starting on a different day
+  const adjustedCurrentDay = (currentDayOfWeek - weekStartsOn + 7) % 7;
   for (let i = 0; i < 24; i++) {
     hours.push(i);
   }
@@ -40,11 +48,14 @@ export default function DisplayWeek({ date, preferences }: any) {
     <div className="week-container">
       <div className="week-header">
         <div className="week-header-day empty"></div>
-        {daysHeader.map((day, index) => (
+        {daysHeader.map((day, index) => {
+            const dayDate = addDays(date, index - adjustedCurrentDay);
+            const dayNumber = format(dayDate, 'd');
+            return (
           <div key={index} className="week-header-day">
-            {day}
+            {`${day} ${dayNumber}`}
           </div>
-        ))}
+        )})}
       </div>
       <div className="week-content">
         <div className="week-content-day hours-container">
