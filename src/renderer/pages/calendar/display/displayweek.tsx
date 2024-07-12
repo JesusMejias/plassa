@@ -12,7 +12,10 @@ export default function DisplayWeek({ date, preferences }: any) {
     'Saturday',
   ];
   const weekStartsOn = 1;
-  const daysHeader = [...originalDaysHeader.slice(weekStartsOn), ...originalDaysHeader.slice(0, weekStartsOn)];
+  const daysHeader = [
+    ...originalDaysHeader.slice(weekStartsOn),
+    ...originalDaysHeader.slice(0, weekStartsOn),
+  ];
   const twentyFourHourFormat = false;
   const hours: number[] = [];
 
@@ -49,13 +52,14 @@ export default function DisplayWeek({ date, preferences }: any) {
       <div className="week-header">
         <div className="week-header-day empty"></div>
         {daysHeader.map((day, index) => {
-            const dayDate = addDays(date, index - adjustedCurrentDay);
-            const dayNumber = format(dayDate, 'd');
-            return (
-          <div key={index} className="week-header-day">
-            {`${day} ${dayNumber}`}
-          </div>
-        )})}
+          const dayDate = addDays(date, index - adjustedCurrentDay);
+          const dayNumber = format(dayDate, 'd');
+          return (
+            <div key={index} className="week-header-day">
+              {`${day} ${dayNumber}`}
+            </div>
+          );
+        })}
       </div>
       <div className="week-content">
         <div className="week-content-day hours-container">
