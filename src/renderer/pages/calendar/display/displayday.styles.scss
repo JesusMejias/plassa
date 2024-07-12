@@ -1,0 +1,32 @@
+$height: 1820px;
+
+.day-container {
+    height: 100%;
+    overflow-y: auto;
+    display: flex;
+    .hourly-box {
+        height: $height;
+        width: 5rem;
+        padding-right: 1rem;
+        display: flex;
+        flex-direction: column;
+        .individual-hour {
+            flex: 1;
+            text-align: right;
+        }
+    }
+    .hourly-event-box {
+        height: $height;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        background-color: #d0d0d0;
+        gap: 1px;
+        border-top: 1px solid #d0d0d0;
+        border-bottom: 1px solid #d0d0d0;
+        .individual-event {
+            flex: 1;
+            background-color: white;
+        }
+    }
+}
