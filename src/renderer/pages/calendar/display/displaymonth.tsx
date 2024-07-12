@@ -5,6 +5,7 @@ import {
   eachDayOfInterval,
   addDays,
   getDay,
+  format,
 } from 'date-fns';
 
 export default function DisplayMonth({ date, preferences }: any) {
@@ -35,6 +36,10 @@ export default function DisplayMonth({ date, preferences }: any) {
     start: addDays(startDay, -daysToPrepend),
     end: addDays(endDay, daysToAppend),
   });
+
+  const isNotThisMonth = (day: Date) => day < startDay || day > endDay;
+
+  const isFirstDayOfMonth = (day: Date) => day.getDate() === 1;
   return (
     <div className="month-container">
       <div className="month-days-of-the-week">
@@ -46,8 +51,8 @@ export default function DisplayMonth({ date, preferences }: any) {
       </div>
       <div className="days-grid">
         {displayDays.map((day, index) => (
-          <div key={index} className={`grid-box-${index + 1}`}>
-            {day.getDate()}
+          <div key={index} className={`grid-box-${index + 1} ${isNotThisMonth(day) ? 'not-this-month' : ''}`}>
+            {isFirstDayOfMonth(day) ? `${format(day, 'MMM')} ${day.getDate()}` : day.getDate()}
           </div>
         ))}
       </div>
