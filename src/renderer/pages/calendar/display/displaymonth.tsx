@@ -51,7 +51,7 @@ export default function DisplayMonth({ date, preferences }: any) {
       </div>
       <div className="days-grid">
         {displayDays.map((day, index) => (
-          <div key={index} className={`grid-box-${index + 1} ${isNotThisMonth(day) ? 'not-this-month' : ''}`}>
+          <div key={index} className={isNotThisMonth(day) ? 'not-this-month' : undefined}>
             {isFirstDayOfMonth(day) ? `${format(day, 'MMM')} ${day.getDate()}` : day.getDate()}
           </div>
         ))}
