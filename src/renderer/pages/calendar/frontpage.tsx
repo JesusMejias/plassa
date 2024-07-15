@@ -14,24 +14,37 @@ export default function FrontPage({ preferences }: any) {
 
   useEffect(() => {
     if (isToday) {
-      const timer = setInterval(() => setCurrentDate(new Date()), 1000);
+      const now = new Date();
+      const tomorrow = new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate() + 1
+      );
+      const msUntilTomorrow = tomorrow.getTime() - now.getTime();
 
-      return function cleanup() {
-        clearInterval(timer);
-      };
+      const timer = setTimeout(() => {
+        setCurrentDate(new Date());
+      }, msUntilTomorrow);
+
+      return () => clearTimeout(timer);
     }
-  }, [isToday]);
+  }, [currentDate]);
 
   function adjustTime(addTime: boolean) {
     type TimeAdjustment = {
-      [key: string]: { days?: number; weeks?: number; months?: number; years?: number; };
+      [key: string]: {
+        days?: number;
+        weeks?: number;
+        months?: number;
+        years?: number;
+      };
     };
     const operation = addTime ? add : sub;
     const timeAdjustment: TimeAdjustment = {
-      'Day': { days: 1 },
-      'Week': { weeks: 1 },
-      'Month': { months: 1 },
-      'Year': { years: 1 }
+      Day: { days: 1 },
+      Week: { weeks: 1 },
+      Month: { months: 1 },
+      Year: { years: 1 },
     };
     const baseTime = isToday ? currentDate : selectedTime;
     const newTime = operation(baseTime, timeAdjustment[displayOption]);
@@ -61,15 +74,18 @@ export default function FrontPage({ preferences }: any) {
             <span>
               {preferences.format === 'US'
                 ? format(isToday ? currentDate : selectedTime, 'MMMM do')
-                : format(isToday ? currentDate : selectedTime, 'd MMMM')},{' '}
-              {getYear(isToday ? currentDate : selectedTime)}
+                : format(isToday ? currentDate : selectedTime, 'd MMMM')}
+              , {getYear(isToday ? currentDate : selectedTime)}
             </span>
           </h1>
         )}
         {(displayOption === 'Week' || displayOption === 'Month') && (
           <h1>
             <span>
-              {`${format(isToday ? currentDate : selectedTime, 'MMMM')} ${getYear(isToday ? currentDate : selectedTime)}`}
+              {`${format(
+                isToday ? currentDate : selectedTime,
+                'MMMM'
+              )} ${getYear(isToday ? currentDate : selectedTime)}`}
             </span>
           </h1>
         )}
@@ -79,7 +95,11 @@ export default function FrontPage({ preferences }: any) {
           </h1>
         )}
       </div>
-      <Display displayOption={displayOption} date={isToday ? currentDate : selectedTime} preferences={preferences} />
+      <Display
+        displayOption={displayOption}
+        date={isToday ? currentDate : selectedTime}
+        preferences={preferences}
+      />
       <div className="next-before-options">
         <button onClick={() => adjustTime(false)}>
           <FontAwesomeIcon icon={faCaretLeft} />

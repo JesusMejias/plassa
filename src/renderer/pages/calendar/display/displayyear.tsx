@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import './displayyear.styles.scss';
 import {
   startOfMonth,
@@ -9,6 +10,18 @@ import {
 } from 'date-fns';
 
 export default function DisplayYear({ date, preferences }: any) {
+  const [today, setToday] = useState(new Date());
+  useEffect(() => { // Step 3
+    const now = new Date();
+    const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+    const msUntilTomorrow = tomorrow.getTime() - now.getTime();
+
+    const timer = setTimeout(() => {
+      setToday(new Date()); // Update today's date at midnight
+    }, msUntilTomorrow);
+
+    return () => clearTimeout(timer); // Cleanup the timer
+  }, [today]);
   const originalDaysHeader = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
   const weekStartsOn = 0;
   const daysHeader = [
@@ -59,8 +72,8 @@ export default function DisplayYear({ date, preferences }: any) {
           </div>
           <div className="day-numbers">
             {generateDaysForMonth(index).map((day, dayIndex) => (
-              <div key={dayIndex} className={`day-individual ${format(day, 'MMMM') !== months[index] ? 'not-this-month' : ''}`}>
-                {day.getDate()}
+              <div key={dayIndex} className={`day-individual ${(format(day, 'MMMM') === months[index] && format(day, 'yyyy-MM-dd') === format(today, 'yyyy-MM-dd')) && 'today'} ${format(day, 'MMMM') !== months[index] && 'not-this-month'}`}>
+                {format(day, 'yyyy-MM-dd') === format(today, 'yyyy-MM-dd') ? <span>{day.getDate()}</span> : day.getDate()}
               </div>
             ))}
           </div>
