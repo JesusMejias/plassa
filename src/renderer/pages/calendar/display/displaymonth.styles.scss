@@ -1,12 +1,16 @@
+$border-color: #d8d8d8;
+
 .month-container {
   display: flex;
   flex-direction: column;
   flex: 1;
   .month-days-of-the-week {
     display: flex;
-    margin-bottom: 1rem;
+    border-bottom: 1px solid $border-color;
+    padding-bottom: 0.5rem;
     .day {
       flex: 1;
+      padding-left: 0.5rem;
     }
   }
   .days-grid {
@@ -14,10 +18,113 @@
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(6, 1fr);
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
+    grid-column-gap: 1px;
+    grid-row-gap: 1px;
+    position: relative;
+    & .cell-grid {
+      padding: 0.5rem;
+    }
     .not-this-month {
       color: #b9b9b9;
+    }
+    .first-day {
+      .day {
+        display: inline-block;
+        margin-left: 0.5rem;
+      }
+    }
+    .today {
+      .first-day {
+        display: flex;
+        .day {
+          margin-left: 1rem;
+          position: relative;
+          &::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: calc(100% + 6px);
+            aspect-ratio: 1;
+            background-color: #ca1c1c;
+            border-radius: 50%;
+          }
+          span {
+            position: relative;
+            color: white;
+          }
+        }
+      }
+
+      .day-not-first {
+        display: flex;
+        .day {
+          position: relative;
+          span {
+            position: relative;
+            color: white;
+          }
+          &::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: calc(100% + 6px);
+            aspect-ratio: 1;
+            background-color: #ca1c1c;
+            border-radius: 50%;
+          }
+        }
+      }
+    }
+    .line-vertical {
+      position: absolute;
+      width: 1px;
+      height: 100%;
+      background-color: $border-color;
+      transform: translatex(-50%);
+      &.first {
+        left: calc(100% / 7);
+      }
+      &.second {
+        left: calc(100% / 7 * 2);
+      }
+      &.third {
+        left: calc(100% / 7 * 3);
+      }
+      &.fourth {
+        left: calc(100% / 7 * 4);
+      }
+      &.fifth {
+        left: calc(100% / 7 * 5);
+      }
+      &.sixth {
+        left: calc(100% / 7 * 6);
+      }
+    }
+    .line-horizontal {
+      position: absolute;
+      height: 1px;
+      width: 100%;
+      background-color: $border-color;
+      transform: translatey(-50%);
+      &.first {
+        top: calc(100% / 6);
+      }
+      &.second {
+        top: calc(100% / 6 * 2);
+      }
+      &.third {
+        top: calc(100% / 6 * 3);
+      }
+      &.fourth {
+        top: calc(100% / 6 * 4);
+      }
+      &.fifth {
+        top: calc(100% / 6 * 5);
+      }
     }
   }
 }

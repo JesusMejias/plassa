@@ -11,16 +11,16 @@ import {
 
 export default function DisplayYear({ date, preferences }: any) {
   const [today, setToday] = useState(new Date());
-  useEffect(() => { // Step 3
+  useEffect(() => {
     const now = new Date();
     const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
     const msUntilTomorrow = tomorrow.getTime() - now.getTime();
 
     const timer = setTimeout(() => {
-      setToday(new Date()); // Update today's date at midnight
+      setToday(new Date());
     }, msUntilTomorrow);
 
-    return () => clearTimeout(timer); // Cleanup the timer
+    return () => clearTimeout(timer);
   }, [today]);
   const originalDaysHeader = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
   const weekStartsOn = 0;

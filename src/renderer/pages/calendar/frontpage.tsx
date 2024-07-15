@@ -28,6 +28,7 @@ export default function FrontPage({ preferences }: any) {
 
       return () => clearTimeout(timer);
     }
+    return () => {};
   }, [currentDate]);
 
   function adjustTime(addTime: boolean) {
