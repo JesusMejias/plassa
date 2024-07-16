@@ -6,7 +6,7 @@ export default function Welcome() {
     return(
         <div className='container-welcome'>
             <h2>Welcome to</h2>
-            <h1>Calendary</h1>
+            <h1>Plassa</h1>
             <div className='btn-container'><button className='link' onClick={() => navigate("/getstarted", { replace: true })}>Let's Get Started</button></div>
         </div>
     );

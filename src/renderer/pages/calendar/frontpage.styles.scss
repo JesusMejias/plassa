@@ -4,13 +4,10 @@
     height: 100%;
     .display-options {
         position: absolute;
-        top: 0;
-        transform: translate(-50%, -50%);
+        top: -1.25rem;
         left: 50%;
-        background-color: #f4f4f4;
+        transform: translate(-50%, -50%);
         border-radius: 6px;
-        padding: .5rem;
-        box-shadow: inset 0 -2px 0 rgba(0, 0, 0, .1);
         display: flex;
         gap: .5rem;
         -webkit-app-region: drag;
@@ -56,13 +53,10 @@
     }
     .next-before-options {
         position: absolute;
-        bottom: 0;
+        bottom: -1.25rem;
         left: 50%;
         transform: translate(-50%, 50%);
-        background-color: #f4f4f4;
         border-radius: 6px;
-        padding: .5rem;
-        box-shadow: inset 0 2px 0 rgba(0, 0, 0, .1);
         display: flex;
         gap: .5rem;
         -webkit-app-region: drag;
@@ -79,8 +73,8 @@
                 background-color: rgba(black, .1);
             }
             &.selected {
-                box-shadow: inset 0 0 4px rgba(0, 0, 0, .6);
-                background-color: white;
+                box-shadow: inset 0 0 0 1px #ca1c1c;
+                color: #ca1c1c;
                 &:active {
                     background-color: rgba(black, .1);
                 }

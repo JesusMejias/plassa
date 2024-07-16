@@ -21,7 +21,7 @@ export default function GetStarted({ store } : any) {
     }
     return (
         <div className='container-getstarted' onMouseDown={(e: any) => (!e.target?.closest('.dropdown-box')) && setDayDropdownOpen(false)}>
-            <h1>Calendary</h1>
+            <h1>Passa</h1>
             <h2>Let's set things up.</h2>
             {page === 1 ? 
             <>
