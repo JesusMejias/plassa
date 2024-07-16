@@ -53,6 +53,12 @@ export default function FrontPage({ preferences }: any) {
     if (isToday) setIsToday(false);
   }
 
+  function changeTime(displayOption: string, newTime: Date) {
+    setDisplayOption(displayOption);
+    setSelectedTime(newTime);
+    setIsToday(false);
+  }
+
   return (
     <div className="front-page">
       <div className="display-options">
@@ -100,6 +106,7 @@ export default function FrontPage({ preferences }: any) {
         displayOption={displayOption}
         date={isToday ? currentDate : selectedTime}
         preferences={preferences}
+        changeTime={changeTime}
       />
       <div className="next-before-options">
         <button onClick={() => adjustTime(false)}>

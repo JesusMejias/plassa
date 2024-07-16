@@ -9,7 +9,7 @@ import {
   format,
 } from 'date-fns';
 
-export default function DisplayMonth({ date, preferences }: any) {
+export default function DisplayMonth({ date, preferences, changeTime }: any) {
   const [today, setToday] = useState(new Date());
   useEffect(() => {
     const now = new Date();
@@ -81,6 +81,7 @@ export default function DisplayMonth({ date, preferences }: any) {
           <div
             key={index}
             className={getDayClass(day)}
+            onDoubleClick={() => changeTime('Day', day)}
           >
             {isFirstDayOfMonth(day)
               ? <div className='first-day'>{format(day, 'MMM')}<div className='day'><span>{day.getDate()}</span></div></div>

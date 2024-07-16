@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import './displayweek.styles.scss';
 import { getDay, addDays, format } from 'date-fns';
 
-export default function DisplayWeek({ date, preferences }: any) {
+export default function DisplayWeek({ date, preferences, changeTime }: any) {
   const [today, setToday] = useState(new Date());
   useEffect(() => {
     const now = new Date();
@@ -66,7 +66,7 @@ export default function DisplayWeek({ date, preferences }: any) {
           const dayDate = addDays(date, index - adjustedCurrentDay);
           const dayNumber = format(dayDate, 'd');
           return (
-            <div key={index} className="week-header-day">
+            <div key={index} className="week-header-day" onDoubleClick={() => changeTime('Day', dayDate)}>
               {day}
               {isToday(dayDate) ? (
                 <div className="today-day-number">

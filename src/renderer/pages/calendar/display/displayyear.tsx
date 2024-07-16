@@ -9,7 +9,7 @@ import {
   format,
 } from 'date-fns';
 
-export default function DisplayYear({ date, preferences }: any) {
+export default function DisplayYear({ date, preferences, changeTime }: any) {
   const [today, setToday] = useState(new Date());
   useEffect(() => {
     const now = new Date();
@@ -62,7 +62,7 @@ export default function DisplayYear({ date, preferences }: any) {
     <div className="year-container">
       {months.map((month, index) => (
         <div key={index} className={`month-individual individual-${index + 1}`}>
-          <div className="month-title">{month}</div>
+          <div className="month-title"><span onDoubleClick={() => changeTime('Month', new Date(date.getFullYear(), index))}>{month}</span></div>
           <div className="day-initials-box">
             {daysHeader.map((day, index) => (
               <div key={index} className="day-initial">
@@ -72,7 +72,7 @@ export default function DisplayYear({ date, preferences }: any) {
           </div>
           <div className="day-numbers">
             {generateDaysForMonth(index).map((day, dayIndex) => (
-              <div key={dayIndex} className={`day-individual${(format(day, 'MMMM') === months[index] && format(day, 'yyyy-MM-dd') === format(today, 'yyyy-MM-dd')) ? ' today' : ''}${format(day, 'MMMM') !== months[index] ? ' not-this-month' : ''}`}>
+              <div key={dayIndex} onDoubleClick={() => changeTime('Day', day)} className={`day-individual${(format(day, 'MMMM') === months[index] && format(day, 'yyyy-MM-dd') === format(today, 'yyyy-MM-dd')) ? ' today' : ''}${format(day, 'MMMM') !== months[index] ? ' not-this-month' : ''}`}>
                 {format(day, 'yyyy-MM-dd') === format(today, 'yyyy-MM-dd') ? <div className='text-day'><span>{day.getDate()}</span></div> : day.getDate()}
               </div>
             ))}
