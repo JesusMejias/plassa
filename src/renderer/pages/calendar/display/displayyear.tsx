@@ -72,8 +72,8 @@ export default function DisplayYear({ date, preferences }: any) {
           </div>
           <div className="day-numbers">
             {generateDaysForMonth(index).map((day, dayIndex) => (
-              <div key={dayIndex} className={`day-individual ${(format(day, 'MMMM') === months[index] && format(day, 'yyyy-MM-dd') === format(today, 'yyyy-MM-dd')) && 'today'} ${format(day, 'MMMM') !== months[index] && 'not-this-month'}`}>
-                {format(day, 'yyyy-MM-dd') === format(today, 'yyyy-MM-dd') ? <span>{day.getDate()}</span> : day.getDate()}
+              <div key={dayIndex} className={`day-individual${(format(day, 'MMMM') === months[index] && format(day, 'yyyy-MM-dd') === format(today, 'yyyy-MM-dd')) ? ' today' : ''}${format(day, 'MMMM') !== months[index] ? ' not-this-month' : ''}`}>
+                {format(day, 'yyyy-MM-dd') === format(today, 'yyyy-MM-dd') ? <div className='text-day'><span>{day.getDate()}</span></div> : day.getDate()}
               </div>
             ))}
           </div>

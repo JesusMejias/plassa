@@ -3,13 +3,13 @@ import { getDay, addDays, format } from 'date-fns';
 
 export default function DisplayWeek({ date, preferences }: any) {
   const originalDaysHeader = [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
+    'Sun',
+    'Mon',
+    'Tue',
+    'Wed',
+    'Thu',
+    'Fri',
+    'Sat',
   ];
   const weekStartsOn = 1;
   const daysHeader = [
@@ -65,7 +65,7 @@ export default function DisplayWeek({ date, preferences }: any) {
         <div className="week-content-day hours-container">
           {hours.map((hour, index) => (
             <div key={index} className="hour">
-              {hourFormat(hour)}
+              <span>{hourFormat(hour)}</span>
             </div>
           ))}
         </div>

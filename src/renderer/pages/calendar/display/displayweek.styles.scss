@@ -5,9 +5,9 @@
     overflow-y: auto;
     .week-header {
         display: flex;
-        margin-bottom: 1rem;
         gap: 1px;
         padding-right: 1px;
+        margin-bottom: .5rem;
         .week-header-day {
             flex: 1;
             &.empty {
@@ -23,8 +23,7 @@
         height: 100%;
         overflow-y: auto;
         gap: 1px;
-        background-color: #d0d0d0;
-        padding-right: 1px;
+        padding: 0.5rem 1px 0.5rem 0;
         .week-content-day {
             height: 1820px;
             flex: 1;
@@ -36,18 +35,20 @@
             // Box for each hour during the day
             .hourly-box {
                 flex: 1;
-                background-color: white;
+                box-shadow: 0 0 0 1px #d0d0d0;
             }
             &.hours-container {
                 flex: unset;
                 width: 5rem;
                 padding-right: 1rem;
                 text-align: right;
-                background-color: white;
                 border-color: transparent;
                 .hour {
                     flex: 1;
-                    background-color: white;
+                    span {
+                        display: block;
+                        transform: translateY(-50%);
+                    }
                 }
             }
         }

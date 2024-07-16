@@ -56,19 +56,24 @@ $border-color: #d8d8d8;
             display: flex;
             justify-content: center;
             align-items: center;
-            span {
-                position: relative;
-            }
             &.today {
-                color: white;
-                position: relative;
-                &::before {
-                    content: '';
-                    position: absolute;
-                    height: 100%;
-                    aspect-ratio: 1 / 1;
-                    background-color: rgb(202, 28, 28);
-                    border-radius: 50%;
+                .text-day {
+                    position: relative;
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        height: calc(100% + .5rem);
+                        aspect-ratio: 1 / 1;
+                        background-color: rgb(202, 28, 28);
+                        border-radius: 50%;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                    }
+                    & span {
+                        position: relative;
+                        color: white;
+                    }
                 }
             }
             &.not-this-month {
