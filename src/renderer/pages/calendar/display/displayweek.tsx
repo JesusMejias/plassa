@@ -1,16 +1,25 @@
+import { useState, useEffect } from 'react';
 import './displayweek.styles.scss';
 import { getDay, addDays, format } from 'date-fns';
 
 export default function DisplayWeek({ date, preferences }: any) {
-  const originalDaysHeader = [
-    'Sun',
-    'Mon',
-    'Tue',
-    'Wed',
-    'Thu',
-    'Fri',
-    'Sat',
-  ];
+  const [today, setToday] = useState(new Date());
+  useEffect(() => {
+    const now = new Date();
+    const tomorrow = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate() + 1
+    );
+    const msUntilTomorrow = tomorrow.getTime() - now.getTime();
+
+    const timer = setTimeout(() => {
+      setToday(new Date());
+    }, msUntilTomorrow);
+
+    return () => clearTimeout(timer);
+  }, [today]);
+  const originalDaysHeader = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   const weekStartsOn = 1;
   const daysHeader = [
     ...originalDaysHeader.slice(weekStartsOn),
@@ -47,6 +56,8 @@ export default function DisplayWeek({ date, preferences }: any) {
     }
     return formattedHour;
   }
+  const isToday = (day: Date) =>
+    format(day, 'yyyy-MM-dd') === format(today, 'yyyy-MM-dd');
   return (
     <div className="week-container">
       <div className="week-header">
@@ -56,7 +67,14 @@ export default function DisplayWeek({ date, preferences }: any) {
           const dayNumber = format(dayDate, 'd');
           return (
             <div key={index} className="week-header-day">
-              {`${day} ${dayNumber}`}
+              {day}
+              {isToday(dayDate) ? (
+                <div className="today-day-number">
+                  <span>{dayNumber}</span>
+                </div>
+              ) : (
+                ` ${dayNumber}`
+              )}
             </div>
           );
         })}

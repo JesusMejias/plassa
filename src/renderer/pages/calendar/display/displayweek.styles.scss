@@ -7,9 +7,30 @@
         display: flex;
         gap: 1px;
         padding-right: 1px;
+        padding-top: .25rem;
         margin-bottom: .5rem;
         .week-header-day {
             flex: 1;
+            display: flex;
+            .today-day-number {
+                position: relative;
+                margin-left: .5rem;
+                & span {
+                    position: relative;
+                    color: white;
+                }
+                &::before {
+                    content: '';
+                    position: absolute;
+                    height: calc(100% + .25rem);
+                    aspect-ratio: 1;
+                    background-color: #ca1c1c;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    border-radius: 50%;
+                }
+            }
             &.empty {
                 flex: unset;
                 width: 5rem;
