@@ -73,7 +73,7 @@ export default function FrontPage({ preferences }: any) {
           <h1>
             <div>{format(isToday ? currentDate : selectedTime, 'iiii')}</div>
             <span>
-              {preferences.format === 'US'
+              {preferences.usFormat
                 ? format(isToday ? currentDate : selectedTime, 'MMMM do')
                 : format(isToday ? currentDate : selectedTime, 'd MMMM')}
               , {getYear(isToday ? currentDate : selectedTime)}

@@ -17,7 +17,7 @@
             font-family: inherit;
             color: inherit;
             border: none;
-            border-radius: 4px;
+            border-radius: 5px;
             background-color: transparent;
             padding: .25rem .75rem;
             &:active {
@@ -27,17 +27,18 @@
                 color: white;
                 position: relative;
                 overflow: hidden;
+                box-shadow: inset 0 4px 3px 0 rgba(255, 255, 255, 0.3), inset 0 -4px 8px 0 rgba(0, 0, 0, 0.2);
                 &.day {
-                    background-image: linear-gradient(0deg, #2b57be, #3b9cc9);
+                    background-color: #3b9cc9;
                 }
                 &.week {
-                    background-image: linear-gradient(0deg, #57be2b, #90c93b);
+                    background-color: #d25700;
                 }
                 &.month {
-                    background-image: linear-gradient(0deg, #be552b, #c9763b);
+                    background-color: #57be2b;
                 }
                 &.year {
-                    background-image: linear-gradient(0deg, #9a3bc9, #be2ba5);
+                    background-color: #be2ba5;
                 }
                 &:active::after {
                     background-color: rgba(black, .1);
