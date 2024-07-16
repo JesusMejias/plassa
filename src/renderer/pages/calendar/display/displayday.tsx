@@ -1,6 +1,46 @@
+import { useEffect, useState } from 'react';
 import './displayday.styles.scss';
 
 export default function DisplayDay({ date }: any) {
+  const [today, setToday] = useState(new Date());
+  const [isVisible, setIsVisible] = useState(false);
+  const [topStyle, setTopStyle] = useState('0%');
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const now = new Date();
+      setToday(now);
+    }, 60000);
+  
+    return () => clearInterval(interval);
+  }, []);
+  useEffect(() => {
+    const now = new Date();
+    const selectedDate = new Date(date);
+    const isToday = now.toDateString() === selectedDate.toDateString();
+
+    setIsVisible(isToday);
+
+    if (isToday) {
+      const currentHour = now.getHours();
+      const currentMinute = now.getMinutes();
+      const percentageOfDayPassed =
+        ((currentHour * 60 + currentMinute) / (24 * 60)) * 100;
+      setTopStyle(`${percentageOfDayPassed}%`);
+    }
+
+    const tomorrow = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate() + 1
+    );
+    const msUntilTomorrow = tomorrow.getTime() - now.getTime();
+
+    const timer = setTimeout(() => {
+      setToday(new Date());
+    }, msUntilTomorrow);
+
+    return () => clearTimeout(timer);
+  }, [today, date]);
   const twentyFourHourFormat = false;
   const hours: number[] = [];
   for (let i = 0; i < 24; i++) {
@@ -32,14 +72,16 @@ export default function DisplayDay({ date }: any) {
       <div className="hourly-box">
         {hours.map((hour, index) => (
           <div key={index} className="individual-hour">
-            {hourFormat(hour)}
+            <span>{hourFormat(hour)}</span>
           </div>
         ))}
       </div>
       <div className="hourly-event-box">
+        {isVisible && (
+          <div className="exact-current-time" style={{ top: topStyle }}></div>
+        )}
         {hours.map((hour, index) => (
-          <div key={index} className="individual-event">
-          </div>
+          <div key={index} className="individual-event"></div>
         ))}
       </div>
     </div>

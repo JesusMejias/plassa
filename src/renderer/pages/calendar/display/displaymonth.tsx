@@ -12,7 +12,6 @@ import {
 export default function DisplayMonth({ date, preferences }: any) {
   const [today, setToday] = useState(new Date());
   useEffect(() => {
-    // Step 3
     const now = new Date();
     const tomorrow = new Date(
       now.getFullYear(),

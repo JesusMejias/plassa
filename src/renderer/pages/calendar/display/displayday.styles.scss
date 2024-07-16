@@ -2,6 +2,7 @@ $height: 1820px;
 
 .day-container {
     height: 100%;
+    padding: .5rem 0;
     overflow-y: auto;
     display: flex;
     .hourly-box {
@@ -13,6 +14,10 @@ $height: 1820px;
         .individual-hour {
             flex: 1;
             text-align: right;
+            span {
+                display: block;
+                transform: translateY(-50%);
+            }
         }
     }
     .hourly-event-box {
@@ -24,9 +29,31 @@ $height: 1820px;
         gap: 1px;
         border-top: 1px solid #d0d0d0;
         border-bottom: 1px solid #d0d0d0;
+        position: relative;
         .individual-event {
             flex: 1;
             background-color: white;
+        }
+        .exact-current-time {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            transform: translatey(-1px);
+            background-color: #ca1c1c;
+            &::before {
+                content: '';
+                position: absolute;
+                width: 9px;
+                height: 9px;
+                border-radius: 50%;
+                background-color: white;
+                border: 1px solid #ca1c1c;
+                left: -9px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
         }
     }
 }
