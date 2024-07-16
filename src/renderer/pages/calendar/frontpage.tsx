@@ -6,8 +6,8 @@ import { faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons';
 import Display from './display';
 
 export default function FrontPage({ preferences }: any) {
-  const [displayOption, setDisplayOption] = useState('Day');
-  const [isToday, setIsToday] = useState<Boolean>(true);
+  const [displayOption, setDisplayOption] = useState<string>('Day');
+  const [isToday, setIsToday] = useState<boolean>(true);
   const [currentDate, setCurrentDate] = useState<Date>(new Date());
   const [selectedTime, setSelectedTime] = useState<Date>(new Date());
   const displayOptions = ['Day', 'Week', 'Month', 'Year'];

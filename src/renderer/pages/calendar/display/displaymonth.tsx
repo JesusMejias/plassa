@@ -10,7 +10,7 @@ import {
 } from 'date-fns';
 
 export default function DisplayMonth({ date, preferences, changeTime }: any) {
-  const [today, setToday] = useState(new Date());
+  const [today, setToday] = useState<Date>(new Date());
   useEffect(() => {
     const now = new Date();
     const tomorrow = new Date(
@@ -36,10 +36,9 @@ export default function DisplayMonth({ date, preferences, changeTime }: any) {
     'Friday',
     'Saturday',
   ];
-  const weekStartsOn = 0;
   const daysHeader = [
-    ...originalDaysHeader.slice(weekStartsOn),
-    ...originalDaysHeader.slice(0, weekStartsOn),
+    ...originalDaysHeader.slice(preferences.weekStartsOn),
+    ...originalDaysHeader.slice(0, preferences.weekStartsOn),
   ];
 
   const startDay = startOfMonth(date);
@@ -48,7 +47,7 @@ export default function DisplayMonth({ date, preferences, changeTime }: any) {
     start: startDay,
     end: endDay,
   }).length;
-  const daysToPrepend = (getDay(startDay) - weekStartsOn + 7) % 7;
+  const daysToPrepend = (getDay(startDay) - preferences.weekStartsOn + 7) % 7;
   const totalDays = daysToPrepend + daysInMonth;
   let daysToAppend = 42 - totalDays;
   if (daysToAppend < 0) daysToAppend += 7;

@@ -3,7 +3,7 @@ import './displayweek.styles.scss';
 import { getDay, addDays, format } from 'date-fns';
 
 export default function DisplayWeek({ date, preferences, changeTime }: any) {
-  const [today, setToday] = useState(new Date());
+  const [today, setToday] = useState<Date>(new Date());
   useEffect(() => {
     const now = new Date();
     const tomorrow = new Date(
@@ -20,24 +20,22 @@ export default function DisplayWeek({ date, preferences, changeTime }: any) {
     return () => clearTimeout(timer);
   }, [today]);
   const originalDaysHeader = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  const weekStartsOn = 1;
   const daysHeader = [
-    ...originalDaysHeader.slice(weekStartsOn),
-    ...originalDaysHeader.slice(0, weekStartsOn),
+    ...originalDaysHeader.slice(preferences.weekStartsOn),
+    ...originalDaysHeader.slice(0, preferences.weekStartsOn),
   ];
-  const twentyFourHourFormat = false;
   const hours: number[] = [];
 
   // Calculate the current day of the week number
   const currentDayOfWeek = getDay(date);
   // Adjust for the week starting on a different day
-  const adjustedCurrentDay = (currentDayOfWeek - weekStartsOn + 7) % 7;
+  const adjustedCurrentDay = (currentDayOfWeek - preferences.weekStartsOn + 7) % 7;
   for (let i = 0; i < 24; i++) {
     hours.push(i);
   }
   function hourFormat(hour: number): string {
     let formattedHour = '';
-    if (twentyFourHourFormat) {
+    if (preferences.use24) {
       if (hour < 10) {
         formattedHour = `0${hour}:00`;
       } else {

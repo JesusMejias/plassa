@@ -10,7 +10,7 @@ import {
 } from 'date-fns';
 
 export default function DisplayYear({ date, preferences, changeTime }: any) {
-  const [today, setToday] = useState(new Date());
+  const [today, setToday] = useState<Date>(new Date());
   useEffect(() => {
     const now = new Date();
     const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
@@ -23,10 +23,9 @@ export default function DisplayYear({ date, preferences, changeTime }: any) {
     return () => clearTimeout(timer);
   }, [today]);
   const originalDaysHeader = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
-  const weekStartsOn = 0;
   const daysHeader = [
-    ...originalDaysHeader.slice(weekStartsOn),
-    ...originalDaysHeader.slice(0, weekStartsOn),
+    ...originalDaysHeader.slice(preferences.weekStartsOn),
+    ...originalDaysHeader.slice(0, preferences.weekStartsOn),
   ];
   const months = [
     'January',
@@ -47,7 +46,7 @@ export default function DisplayYear({ date, preferences, changeTime }: any) {
       new Date(date.getFullYear(), monthIndex)
     );
     const lastDayOfMonth = endOfMonth(firstDayOfMonth);
-    const daysToPrepend = (getDay(firstDayOfMonth) - weekStartsOn + 7) % 7;
+    const daysToPrepend = (getDay(firstDayOfMonth) - preferences.weekStartsOn + 7) % 7;
     const daysToAppend =
       42 -
       daysToPrepend -

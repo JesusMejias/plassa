@@ -5,11 +5,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons';
 
 export default function GetStarted({ store }: any) {
-  const [page, setPage] = useState(1);
-  const [day, setDay] = useState('Sunday');
-  const [dayDropdownOpen, setDayDropdownOpen] = useState(false);
-  const [usFormat, setUSFormat] = useState(true);
-  const [use24, setUse24] = useState(false);
+  const [page, setPage] = useState<number>(1);
+  const [day, setDay] = useState<number>(0);
+  const [dayDropdownOpen, setDayDropdownOpen] = useState<boolean>(false);
+  const [usFormat, setUSFormat] = useState<boolean>(true);
+  const [use24, setUse24] = useState<boolean>(false);
   const navigate = useNavigate();
   const days = [
     'Sunday',
@@ -22,7 +22,7 @@ export default function GetStarted({ store }: any) {
   ];
   function finish() {
     store.set('preferences', {
-      day,
+      weekStartsOn: day,
       usFormat,
       use24,
     });
@@ -47,7 +47,7 @@ export default function GetStarted({ store }: any) {
               className="dropdown-button"
               onClick={() => setDayDropdownOpen(!dayDropdownOpen)}
             >
-              {day}{' '}
+              {days[day]}{' '}
               {dayDropdownOpen ? (
                 <FontAwesomeIcon icon={faCaretUp} />
               ) : (
@@ -58,10 +58,10 @@ export default function GetStarted({ store }: any) {
               <div className="dropdown-content">
                 {days.map((d, index) => (
                   <span
-                    className={day === d ? 'day selected' : 'day'}
+                    className={day === index ? 'day selected' : 'day'}
                     key={index}
                     onClick={() => {
-                      setDay(d);
+                      setDay(index);
                       setDayDropdownOpen(false);
                     }}
                   >

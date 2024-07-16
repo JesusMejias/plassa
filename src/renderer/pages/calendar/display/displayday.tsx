@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import './displayday.styles.scss';
 
-export default function DisplayDay({ date }: any) {
-  const [today, setToday] = useState(new Date());
-  const [isVisible, setIsVisible] = useState(false);
-  const [topStyle, setTopStyle] = useState('0%');
+export default function DisplayDay({ date, preferences }: any) {
+  const [today, setToday] = useState<Date>(new Date());
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [topStyle, setTopStyle] = useState<string>('0%');
   useEffect(() => {
     const interval = setInterval(() => {
       const now = new Date();
@@ -41,14 +41,13 @@ export default function DisplayDay({ date }: any) {
 
     return () => clearTimeout(timer);
   }, [today, date]);
-  const twentyFourHourFormat = false;
   const hours: number[] = [];
   for (let i = 0; i < 24; i++) {
     hours.push(i);
   }
   function hourFormat(hour: number): string {
     let formattedHour = '';
-    if (twentyFourHourFormat) {
+    if (preferences.use24) {
       if (hour < 10) {
         formattedHour = `0${hour}:00`;
       } else {
