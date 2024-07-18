@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import './App.scss';
+import './App.styles.scss';
 import Welcome from './pages/welcome';
 import GetStarted from './pages/welcome/getstarted';
 import Calendar from './pages/calendar/index';
