@@ -29,9 +29,17 @@ $height: 1820px;
         border-top: 1px solid #d0d0d0;
         border-bottom: 1px solid #d0d0d0;
         position: relative;
-        .individual-event {
+        .hour-section-event {
             flex: 1;
             box-shadow: 0 1px 0 #d0d0d0;
+            display: flex;
+            flex-direction: column;
+            .quarterly-gap {
+                flex: 1;
+                &:hover {
+                    background-color: red;
+                }
+            }
         }
         .exact-current-time {
             position: absolute;

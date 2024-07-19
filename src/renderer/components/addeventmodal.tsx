@@ -2,16 +2,35 @@ import React, { useState } from 'react';
 import './addeventmodal.styles.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { DateField } from '@adobe/react-spectrum';
+import {
+  parseZonedDateTime,
+  fromDate,
+  getLocalTimeZone,
+} from '@internationalized/date';
+import { addHours, set } from 'date-fns';
 
-export default function AddEventModal({ setShowAddEventModal }: any) {
+export default function AddEventModal({
+  setShowAddEventModal,
+  date,
+  keepTime,
+}: any) {
+  const tempDate = new Date(date);
   const [title, setTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [allDay, setAllDay] = useState<boolean>(false);
+  const [starts, setStarts] = useState(
+    keepTime ? date : new Date(tempDate.setHours(9, 0, 0, 0))
+  );
+  const [ends, setEnds] = useState(
+    keepTime ? addHours(date, 1) : new Date(tempDate.setHours(10, 0, 0, 0))
+  );
   return (
     <div
       className="add-event-modal"
       onMouseDown={(e: any) =>
-        !e.target?.closest('.add-event-container') && setShowAddEventModal(false)
+        !e.target?.closest('.add-event-container') &&
+        setShowAddEventModal(false)
       }
     >
       <div className="add-event-container">
@@ -28,15 +47,26 @@ export default function AddEventModal({ setShowAddEventModal }: any) {
           placeholder="New Event"
           onChange={(e) => setTitle(e.target.value)}
         />
-        <input
+        <textarea
           className="description"
-          type="text"
           placeholder="Description"
           onChange={(e) => setDescription(e.target.value)}
-        />
-        <div className="choose-date-and-time">
-          <div className="cal-flex">hi</div>
-          <div className="cal-flex">hi</div>
+        ></textarea>
+        <div className="cal-flex">
+          <label>Starts</label>
+          <DateField
+            granularity="minute"
+            defaultValue={fromDate(starts, getLocalTimeZone())}
+            hideTimeZone
+          />
+        </div>
+        <div className="cal-flex">
+          <label>Ends</label>
+          <DateField
+            granularity="minute"
+            defaultValue={fromDate(ends, getLocalTimeZone())}
+            hideTimeZone
+          />
         </div>
       </div>
     </div>

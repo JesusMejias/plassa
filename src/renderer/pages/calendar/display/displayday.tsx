@@ -6,7 +6,9 @@ export default function DisplayDay({ date, preferences }: any) {
   const [today, setToday] = useState<Date>(new Date());
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [topStyle, setTopStyle] = useState<string>('0%');
-  const [showAddEventModal, setShowAddEventModal] = useState<boolean>(true);
+  const [showAddEventModal, setShowAddEventModal] = useState<boolean>(false);
+  const [tempDate, setTempDate] = useState<Date | undefined>(undefined);
+  const [keepTime, setKeepTime] = useState<boolean>(false);
   useEffect(() => {
     const interval = setInterval(() => {
       const now = new Date();
@@ -68,9 +70,16 @@ export default function DisplayDay({ date, preferences }: any) {
     }
     return formattedHour;
   }
+  function handleAddEventClick(hour: number, minute: number) {
+    const newDate = new Date(date);
+    newDate.setHours(hour, minute, 0, 0);
+    setTempDate(newDate);
+    setKeepTime(true);
+    setShowAddEventModal(true);
+  }
   return (
     <div className="day-container">
-      {showAddEventModal && <AddEventModal setShowAddEventModal={setShowAddEventModal} />}
+      {showAddEventModal && <AddEventModal setShowAddEventModal={setShowAddEventModal} date={tempDate} keepTime={keepTime} />}
       <div className="hourly-box">
         {hours.map((hour, index) => (
           <div key={index} className="individual-hour">
@@ -83,7 +92,12 @@ export default function DisplayDay({ date, preferences }: any) {
           <div className="exact-current-time" style={{ top: topStyle }}></div>
         )}
         {hours.map((hour, index) => (
-          <div key={index} className="individual-event"></div>
+          <div key={index} className="hour-section-event">
+            <div className="quarterly-gap" onDoubleClick={() => handleAddEventClick(hour, 0)}></div>
+            <div className="quarterly-gap" onDoubleClick={() => handleAddEventClick(hour, 15)}></div>
+            <div className="quarterly-gap" onDoubleClick={() => handleAddEventClick(hour, 30)}></div>
+            <div className="quarterly-gap" onDoubleClick={() => handleAddEventClick(hour, 45)}></div>
+          </div>
         ))}
       </div>
     </div>
