@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './addeventmodal.styles.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faSquare, faSquareCheck } from '@fortawesome/free-regular-svg-icons';
 import { DateField } from '@adobe/react-spectrum';
 import {
   parseZonedDateTime,
@@ -68,6 +69,10 @@ export default function AddEventModal({
             hideTimeZone
           />
         </div>
+        <div className="all-day-event" onClick={() => setAllDay(!allDay)}>
+          <label>All-Day</label><FontAwesomeIcon icon={allDay ? faSquareCheck : faSquare } />
+        </div>
+        <div className="buttons-bottom"><button onClick={() => setShowAddEventModal(false)}>Cancel</button><button className='action'>Add</button></div>
       </div>
     </div>
   );

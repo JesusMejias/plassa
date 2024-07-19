@@ -56,15 +56,57 @@
         textarea.description {
             font-size: 1rem;
             resize: none;
-            height: 5rem;
+            height: 1.25rem;
+            transition: .3s ease height;
+            &:focus {
+                height: 5rem;
+            }
         }
-    }
 
-    .cal-flex {
-    justify-content: space-between;
-    display: flex;
-        & *:focus {
-            color: green;
+        .cal-flex {
+        justify-content: space-between;
+        display: flex;
+            & *:focus {
+                color: green;
+            }
+        }
+
+        .all-day-event {
+            display: flex;
+            margin-top: .5rem;
+            align-items: center;
+            align-self: center;
+            gap: .5rem;
+            transition: .1s ease color;
+            &:active {
+                color: #7b7b7b;
+            }
+        }
+        .buttons-bottom {
+            display: flex;
+            justify-content: center;
+            gap: .75rem;
+            margin-top: 1.5rem;
+            button {
+                border-radius: 5px;
+                appearance: none;
+                border: 1px solid black;
+                padding: .5rem 1rem;
+                background-color: transparent;
+                font: inherit;
+                &:active {
+                    background-color: black;
+                    color: white;
+                }
+                &.action {
+                    color: #ca1c1c;
+                    border-color: #ca1c1c;
+                    &:active {
+                        background-color: #ca1c1c;
+                        color: white;
+                    }
+                }
+            }
         }
     }
 }
