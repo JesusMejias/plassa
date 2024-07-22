@@ -1,112 +1,113 @@
 .add-event-modal {
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    top: -2.5rem;
-    left: -.5rem;
-    background-color: rgba(black, 0.2);
-    z-index: 9999;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: -2.5rem;
+  left: -0.5rem;
+  background-color: rgba(black, 0.2);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .add-event-container {
+    background-color: white;
+    border-radius: 6px;
+    padding: 1rem;
+    min-width: 20rem;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    .add-event-container {
-        background-color: white;
-        border-radius: 6px;
-        padding: 1rem;
-        min-width: 20rem;
-        display: flex;
-        flex-direction: column;
-        h2 {
-            font-weight: normal;
-            margin: 0;
-            position: relative;
-            border-bottom: 1px solid rgb(194, 194, 194);
-            padding-bottom: .5rem;
-            margin-bottom: 1rem;
-            .close {
-                position: absolute;
-                top: 0;
-                right: 0;
-                &:active {
-                    color: #7b7b7b;
-                }
-            }
+    flex-direction: column;
+    h2 {
+      font-weight: normal;
+      margin: 0;
+      position: relative;
+      border-bottom: 1px solid rgb(194, 194, 194);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+      .close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        &:active {
+          color: #7b7b7b;
         }
-        input, textarea {
-            appearance: none;
-            border: none;
-            font: inherit;
-            margin-left: -1rem;
-            margin-right: -1rem;
-            margin-bottom: 1rem;
-            transition: .2s ease box-shadow;
-            color: #4f4f4f;
-            cursor: text;
-            padding: 0 1rem;
-            &::placeholder {
-                color: #acacac;
-            }
-            &:focus {
-                box-shadow: inset 4px 0 0 #ca1c1c;
-            }
-        }
-        input.title {
-            font-size: 1.25rem;
-        }
-        textarea.description {
-            font-size: 1rem;
-            resize: none;
-            height: 1.25rem;
-            transition: .3s ease height;
-            &:focus {
-                height: 5rem;
-            }
-        }
-
-        .cal-flex {
-        justify-content: space-between;
-        display: flex;
-            & *:focus {
-                color: green;
-            }
-        }
-
-        .all-day-event {
-            display: flex;
-            margin-top: .5rem;
-            align-items: center;
-            align-self: center;
-            gap: .5rem;
-            transition: .1s ease color;
-            &:active {
-                color: #7b7b7b;
-            }
-        }
-        .buttons-bottom {
-            display: flex;
-            justify-content: center;
-            gap: .75rem;
-            margin-top: 1.5rem;
-            button {
-                border-radius: 5px;
-                appearance: none;
-                border: 1px solid black;
-                padding: .5rem 1rem;
-                background-color: transparent;
-                font: inherit;
-                &:active {
-                    background-color: black;
-                    color: white;
-                }
-                &.action {
-                    color: #ca1c1c;
-                    border-color: #ca1c1c;
-                    &:active {
-                        background-color: #ca1c1c;
-                        color: white;
-                    }
-                }
-            }
-        }
+      }
     }
+    input,
+    textarea {
+      appearance: none;
+      border: none;
+      font: inherit;
+      margin-left: -1rem;
+      margin-right: -1rem;
+      margin-bottom: 1rem;
+      transition: 0.2s ease box-shadow;
+      color: #4f4f4f;
+      cursor: text;
+      padding: 0 1rem;
+      &::placeholder {
+        color: #acacac;
+      }
+      &:focus {
+        box-shadow: inset 4px 0 0 #ca1c1c;
+      }
+    }
+    input.title {
+      font-size: 1.25rem;
+    }
+    textarea.description {
+      font-size: 1rem;
+      resize: none;
+      height: 1.25rem;
+      transition: 0.3s ease height;
+      &:focus {
+        height: 5rem;
+      }
+    }
+
+    .cal-flex {
+      justify-content: space-between;
+      display: flex;
+      & *:focus {
+        color: green;
+      }
+    }
+
+    .all-day-event {
+      display: flex;
+      margin-top: 0.5rem;
+      align-items: center;
+      align-self: center;
+      gap: 0.5rem;
+      transition: 0.1s ease color;
+      &:active {
+        color: #7b7b7b;
+      }
+    }
+    .buttons-bottom {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+      button {
+        border-radius: 5px;
+        appearance: none;
+        border: 1px solid black;
+        padding: 0.5rem 1rem;
+        background-color: transparent;
+        font: inherit;
+        &:active {
+          background-color: black;
+          color: white;
+        }
+        &.action {
+          color: #ca1c1c;
+          border-color: #ca1c1c;
+          &:active {
+            background-color: #ca1c1c;
+            color: white;
+          }
+        }
+      }
+    }
+  }
 }

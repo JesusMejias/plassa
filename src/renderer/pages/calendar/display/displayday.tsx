@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import './displayday.styles.scss';
 import AddEventModal from '../../../components/addeventmodal';
 
-export default function DisplayDay({ date, preferences }: any) {
+export default function DisplayDay({ date, preferences, events, updateEvents }: any) {
   const [today, setToday] = useState<Date>(new Date());
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [topStyle, setTopStyle] = useState<string>('0%');
@@ -79,7 +79,7 @@ export default function DisplayDay({ date, preferences }: any) {
   }
   return (
     <div className="day-container">
-      {showAddEventModal && <AddEventModal setShowAddEventModal={setShowAddEventModal} date={tempDate} keepTime={keepTime} />}
+      {showAddEventModal && <AddEventModal setShowAddEventModal={setShowAddEventModal} date={tempDate} keepTime={keepTime} updateEvents={updateEvents} />}
       <div className="hourly-box">
         {hours.map((hour, index) => (
           <div key={index} className="individual-hour">

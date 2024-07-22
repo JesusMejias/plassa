@@ -5,7 +5,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons';
 import Display from './display';
 
-export default function FrontPage({ preferences }: any) {
+export default function FrontPage({
+  preferences,
+  updatePreferences,
+  events,
+  updateEvents,
+}: any) {
   const [displayOption, setDisplayOption] = useState<string>('Day');
   const [isToday, setIsToday] = useState<boolean>(true);
   const [currentDate, setCurrentDate] = useState<Date>(new Date());
@@ -107,6 +112,8 @@ export default function FrontPage({ preferences }: any) {
         date={isToday ? currentDate : selectedTime}
         preferences={preferences}
         changeTime={changeTime}
+        events={events}
+        updateEvents={updateEvents}
       />
       <div className="next-before-options">
         <button onClick={() => adjustTime(false)}>
