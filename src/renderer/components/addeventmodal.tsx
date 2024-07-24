@@ -6,6 +6,7 @@ import { faSquare, faCheckSquare } from '@fortawesome/free-solid-svg-icons';
 import { DateField } from '@adobe/react-spectrum';
 import { fromDate, getLocalTimeZone } from '@internationalized/date';
 import { addHours } from 'date-fns';
+import { Event } from '../types';
 import uniqid from 'uniqid';
 
 export default function AddEventModal({
@@ -24,14 +25,38 @@ export default function AddEventModal({
   const [ends, setEnds] = useState(
     keepTime ? addHours(date, 1) : new Date(tempDate.setHours(10, 0, 0, 0))
   );
+  function generateRandomColor() {
+    // Generate a random color component with high contrast and brightness
+    const generateComponent = () => {
+      const high = Math.floor(Math.random() * (255 - 200) + 200); // Bright component
+      const low = Math.floor(Math.random() * 100); // Dark component
+      return Math.random() > 0.5 ? high : low; // Randomly choose between bright and dark for contrast
+    };
+  
+    let r = generateComponent();
+    let g = generateComponent();
+    let b = generateComponent();
+  
+    // Ensure the color is not too close to grey to maintain colorfulness
+    // Check if the components are all high or all low and adjust one if necessary
+    if ((r > 200 && g > 200 && b > 200) || (r < 100 && g < 100 && b < 100)) {
+      const components = [r, g, b];
+      const indexToAdjust = Math.floor(Math.random() * components.length);
+      components[indexToAdjust] = components[indexToAdjust] > 200 ? Math.floor(Math.random() * 100) : Math.floor(Math.random() * (255 - 200) + 200);
+      [r, g, b] = components;
+    }
+  
+    return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
+  }
   function handleAddEvent() {
-    const newEvent = {
+    const newEvent: Event = {
       id: uniqid(),
       title,
       description,
       allDay,
       starts,
       ends,
+      color: generateRandomColor(),
     };
     updateEvents('add', newEvent);
     setShowAddEventModal(false);

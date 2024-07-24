@@ -18,6 +18,8 @@ import Store from 'electron-store';
 
 const store = new Store();
 
+store.delete('events');
+
 export default class AppUpdater {
   constructor() {
     log.transports.file.level = 'info';

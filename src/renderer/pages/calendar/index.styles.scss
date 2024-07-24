@@ -3,7 +3,7 @@
     background-color: #f4f4f4;
     position: relative;
     -webkit-app-region: drag;
-    .inside {
+    & > .inside {
         position: absolute;
         width: calc(100% - 1rem);
         height: calc(100% - 5rem);
