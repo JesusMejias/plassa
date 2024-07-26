@@ -2,7 +2,7 @@ $height: 1820px;
 
 .day-container {
     height: 100%;
-    padding: .5rem 0;
+    padding: 4rem 0 .5rem 0;
     overflow-y: auto;
     display: flex;
     .hourly-box {
@@ -43,12 +43,26 @@ $height: 1820px;
         .event {
             position: absolute;
             color: white;
-            background-color: red;
             border-radius: 5px;
-            padding: .25rem;
+            padding: .5rem;
+            min-height: 1.75rem;
             width: 100%;
             font-size: .75rem;
-            cursor: pointer;
+            border-style: solid;
+            border-color: rgba(black, .4);
+            border-width: 0 0 0 2px;
+            box-shadow: inset 2px 0 0 0 rgba(white, .5);
+            overflow: hidden;
+            text-shadow: 0 1px 0 rgba(black, .2);
+            &:active::after {
+                content: '';
+                position: absolute;
+                width: 100%;
+                top: 0;
+                left: 0;
+                height: 100%;
+                background-color: rgba(black, 0.2);
+            }
         }
         .exact-current-time {
             position: absolute;
@@ -73,17 +87,20 @@ $height: 1820px;
         }
     }
     .all-day-events-container {
-        display: none; //remove once it's ready to be implemented
         position: fixed;
         width: 100%;
         left: 0;
-        background-color: rgba(rgb(29, 110, 209), .4);
-        transform: translateY(-50%);
+        background-color: rgba(#ffffff, .4);
+        border-style: solid;
+        border-color: rgba(black, .4);
+        border-width: 1px 0;
+        //box-shadow: 0 2px 5px rgba(black, .2);
+        transform: translateY(calc(-3rem - 50%));
         z-index: 1;
         backdrop-filter: blur(5px);
         .inside {
             display: flex;
-            padding: .25rem 1.5rem;
+            padding: .5rem 1.5rem;
             & > .label {
                 width: 5rem;
                 text-align: right;
@@ -93,12 +110,29 @@ $height: 1820px;
             & > .all-day-display {
                 flex: 1;
                 display: flex;
-                gap: .25rem;
+                gap: .5rem;
                 & > .event {
                     flex: 1;
-                    background-color: rgba(255, 255, 255, 0.6);
                     border-radius: 5px;
-                    padding: .25rem;
+                    padding: .5rem;
+                    text-shadow: 0 1px 0 rgba(black, .2);
+                    border-style: solid;
+                    color: white;
+                    border-color: rgba(black, .4);
+                    border-width: 0 0 0 2px;
+                    box-shadow: inset 2px 0 0 0 rgba(white, .5);
+                    position: relative;
+                    overflow: hidden;
+                    font-size: .75rem;
+                    &:active::after {
+                        content: '';
+                        position: absolute;
+                        width: 100%;
+                        top: 0;
+                        left: 0;
+                        height: 100%;
+                        background-color: rgba(black, 0.2);
+                    }
                 }
             }
         }

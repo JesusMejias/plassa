@@ -1,4 +1,11 @@
-import { JSXElementConstructor, ReactElement, ReactFragment, ReactPortal, useEffect, useState } from 'react';
+import {
+  JSXElementConstructor,
+  ReactElement,
+  ReactFragment,
+  ReactPortal,
+  useEffect,
+  useState,
+} from 'react';
 import './displayday.styles.scss';
 import AddEventModal from '../../../components/addeventmodal';
 import { Event } from '../../../types';
@@ -85,16 +92,34 @@ export default function DisplayDay({
     setShowAddEventModal(true);
   }
   const filterEvents = (events: Event[]) => {
-    return events.filter(event => {
+    return events.filter((event) => {
       if (event.allDay) return false;
       const eventStart = new Date(event.starts);
       const eventEnd = new Date(event.ends);
       const dayStart = startOfDay(date);
       const dayEnd = endOfDay(date);
 
-      return isWithinInterval(eventStart, { start: dayStart, end: dayEnd }) || 
-             isWithinInterval(eventEnd, { start: dayStart, end: dayEnd }) ||
-             (eventStart < dayStart && eventEnd > dayEnd);
+      return (
+        isWithinInterval(eventStart, { start: dayStart, end: dayEnd }) ||
+        isWithinInterval(eventEnd, { start: dayStart, end: dayEnd }) ||
+        (eventStart < dayStart && eventEnd > dayEnd)
+      );
+    });
+  };
+
+  const filterAllDayEvents = (events: Event[]) => {
+    return events.filter((event) => {
+      if (!event.allDay) return false;
+      const eventStart = new Date(event.starts);
+      const eventEnd = new Date(event.ends);
+      const dayStart = startOfDay(date);
+      const dayEnd = endOfDay(date);
+
+      return (
+        isWithinInterval(eventStart, { start: dayStart, end: dayEnd }) ||
+        isWithinInterval(eventEnd, { start: dayStart, end: dayEnd }) ||
+        (eventStart < dayStart && eventEnd > dayEnd)
+      );
     });
   };
 
@@ -126,18 +151,21 @@ export default function DisplayDay({
     const columns: Event[][] = [];
     const overlaps: { [id: string]: number } = {};
 
-    events.forEach(event => {
+    events.forEach((event) => {
       let placed = false;
 
       for (let i = 0; i < columns.length; i++) {
         if (
           columns[i].every(
-            e => e.ends <= event.starts || e.starts >= event.ends
+            (e) => e.ends <= event.starts || e.starts >= event.ends
           )
         ) {
           columns[i].push(event);
           eventPositions[event.id] = i;
-          overlaps[event.id] = Math.max(overlaps[event.id] || 0, columns[i].length);
+          overlaps[event.id] = Math.max(
+            overlaps[event.id] || 0,
+            columns[i].length
+          );
           placed = true;
           break;
         }
@@ -153,19 +181,34 @@ export default function DisplayDay({
     return { columns, eventPositions, overlaps };
   };
 
+  const renderAllDayEvents = (events: Event[]) => {
+    const allDayEvents = filterAllDayEvents(events);
+
+    return allDayEvents.map((event) => (
+      <div
+        key={event.id}
+        className="event"
+        style={{ backgroundColor: event.color }}
+      >
+        {event.title}
+      </div>
+    ));
+  };
+
   const renderEvents = (events: Event[]) => {
     const filteredEvents = filterEvents(events);
-    const { columns, eventPositions, overlaps } = calculateColumns(filteredEvents);
+    const { columns, eventPositions, overlaps } =
+      calculateColumns(filteredEvents);
 
     const eventColumnsCount: { [key: string]: number } = {};
-    filteredEvents.forEach(event => {
+    filteredEvents.forEach((event) => {
       const overlappingEvents = filteredEvents.filter(
-        e => e.starts < event.ends && e.ends > event.starts
+        (e) => e.starts < event.ends && e.ends > event.starts
       );
       eventColumnsCount[event.id] = overlappingEvents.length;
     });
 
-    return filteredEvents.map(event => {
+    return filteredEvents.map((event) => {
       const columnIndex = eventPositions[event.id];
       const columnCount = eventColumnsCount[event.id];
       const styles = calculateEventStyles(event, columnIndex, columnCount);
@@ -176,14 +219,17 @@ export default function DisplayDay({
       );
     });
   };
+
   return (
     <div className="day-container">
-      {/* <div className="all-day-events-container">
-        <div className="inside">
-          <div className='label'>All-Day</div>
-          <div className='all-day-display'><div className="event">hiii</div><div className="event">hiii</div><div className="event">hiii</div><div className="event">hiii</div><div className="event">hiii</div><div className="event">hiii</div></div>
+      {filterAllDayEvents(events).length > 0 && (
+        <div className="all-day-events-container">
+          <div className="inside">
+            <div className="label">All-Day</div>
+            <div className="all-day-display">{renderAllDayEvents(events)}</div>
+          </div>
         </div>
-      </div> */}
+      )}
       {showAddEventModal && (
         <AddEventModal
           setShowAddEventModal={setShowAddEventModal}
