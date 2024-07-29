@@ -1,3 +1,5 @@
+![plassa-hero](https://github.com/user-attachments/assets/b13d8c2b-e456-44b4-8e40-d69e8c0f55c8)
+
 Note: At this moment Plassa is still under early stages of development, which means some features might not work just yet.
 
 # Plassa
