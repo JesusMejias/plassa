@@ -84,7 +84,3 @@ We welcome contributions to Plassa! To contribute, follow these steps:
     ```
 
 5. **Create a new Pull Request.**
-
-## License
-
-Plassa is released under the MIT License. See `LICENSE` for more information.
